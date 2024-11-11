@@ -2,7 +2,6 @@ perspective-carousel {
   box-sizing: border-box;
   display: flex;
   justify-content: center;
-  transition: background-color 300ms;
 
   #contain {
     width: 100%;
@@ -14,48 +13,10 @@ perspective-carousel {
     overflow: hidden;
   }
 
-  &[data-initializing] {
-    .wrap {
-      transition: all 1s ease-out;
-    }
-  }
-
-  &[data-active] {
-    .wrap {
-      transition: all 0.5s ease-in-out;
-    }
-  }
-
-  &[data-initializing],
-  &[data-active] {
-    background-color: transparent;
-
-    img {
-      filter: blur(0px) brightness(1);
-    }
-
-    [data-z="1"],
-    [data-z="2"] {
-      filter: blur(2px) brightness(0.3);
-    }
-
-    [data-z="3"],
-    [data-z="4"] {
-      filter: blur(0px) brightness(0.8);
-    }
-  }
-
-  .wrap {
+  carousel-item {
+    transition: all 0.5s ease-in-out;
     position: absolute;
     top: 50%;
     transform: translate(calc(50cqw - 50%), -50%);
   }
-
-  /* img {
-    width: auto;
-    height: 600px;
-    object-fit: cover;
-    filter: blur(0px) brightness(0);
-    transform: scale(0.6);
-  } */
 }

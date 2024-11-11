@@ -42,7 +42,7 @@ export class PerspectiveCarousel extends HTMLElement {
   private items: HTMLElement[] = [];
 
   connectedCallback() {
-    this.items = [...this.querySelectorAll<HTMLElement>("carousel-items")!];
+    this.items = [...this.querySelectorAll<HTMLElement>("carousel-item")!];
 
     this.items.forEach((item, index) => {
       item.classList.add("wrap");
@@ -53,16 +53,12 @@ export class PerspectiveCarousel extends HTMLElement {
     container.id = "contain";
 
     container.append(...this.items);
+    this.append(container);
   }
 
   init() {
-    this.dispatchEvent(new CustomEvent("init"));
-    this.setAttribute("data-initializing", "");
     this.updatePositions();
-    setTimeout(() => {
-      this.removeAttribute("data-initializing");
-      this.setAttribute("data-active", "");
-    }, 2000);
+    this.setAttribute("data-active", "");
   }
 
   get currentOffset() {
@@ -84,14 +80,14 @@ export class PerspectiveCarousel extends HTMLElement {
       await new Promise((resolve) => {
         absOffset--;
         this.addEventListener("transitionend", resolve, { once: true });
-        this.moveCarousel(isReversing ? -1 : 1);
+        this.moveCarouselInternal(isReversing ? -1 : 1);
       });
 
       await new Promise((resolve) => setTimeout(resolve, 10));
     }
   }
 
-  moveCarousel(direction: number) {
+  moveCarouselInternal(direction: number) {
     isReversing = direction < 0;
 
     currentState = (currentState - direction) % count;
@@ -100,16 +96,13 @@ export class PerspectiveCarousel extends HTMLElement {
   }
 
   private updatePositions() {
-    const wraps = document.querySelectorAll<HTMLElement>(".wrap");
-    const balls = document.querySelectorAll<HTMLElement>(".ball");
+    const wraps = this.querySelectorAll<HTMLElement>("carousel-item");
     wraps.forEach((wrap, index) => {
       let positionIndex = (index + currentState) % count;
       if (positionIndex < 0) positionIndex += count;
       const position = positions[positionIndex];
-      wrap.style.transform = `translate(calc(50cqw + ${position.translate}cqw - 50%), -50%)`;
+      wrap.style.transform = `translate(calc(50cqw + ${position.translate}cqw - 50%), -50%) scale(${position.scale})`;
       wrap.style.zIndex = (isReversing ? position.reverseZIndex : position.zIndex).toString();
-      balls[index].style.transform = `scale(${position.scale})`;
-      balls[index].dataset.z = wrap.style.zIndex;
     });
   }
 }
