@@ -7,9 +7,9 @@ const carousels = [...document.querySelectorAll<PerspectiveCarousel>("perspectiv
 
 carousels.forEach((carousel, index) => {
   setTimeout(() => {
-    carousel.moveCarouselRelative(5);
+    carousel.rotate(5);
   }, 1000);
   setTimeout(() => {
-    carousel.moveCarouselRelative(-5);
+    carousel.rotate(-5);
   }, 4000);
 });

@@ -1,6 +1,6 @@
 perspective-carousel {
-  height: 800px;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   box-sizing: border-box;
   display: flex;
   /* justify-content: center; */
@@ -14,5 +14,27 @@ perspective-carousel {
     position: absolute;
     top: 50%;
     transform: translate(calc(50cqw - 50%), -50%);
+  }
+
+  filter: blur(0px);
+  opacity: 1;
+
+  &:not([fade-to-blur="off"]) {
+    [data-fade="3"],
+    [data-fade="4"] {
+      filter: blur(2px);
+    }
+  }
+
+  &:not([fade-to-transparent="off"]) {
+    [data-fade="3"],
+    [data-fade="4"] {
+      opacity: 0.3;
+    }
+
+    [data-fade="1"],
+    [data-fade="2"] {
+      opacity: 0.8;
+    }
   }
 }

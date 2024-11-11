@@ -20,7 +20,7 @@ export class PerspectiveCarousel extends HTMLElement {
     this.layout = matchingLayout.layout;
 
     // initial render
-    this.updatePositions();
+    this.#updatePositions();
   }
 
   get currentOffset() {
@@ -31,40 +31,42 @@ export class PerspectiveCarousel extends HTMLElement {
     return (this.currentOffset + 1) % this.layout.length;
   }
 
-  get currentItem() {
+  get focusedItem() {
     return this.items[this.focusedItemIndex];
   }
 
-  async moveCarouselRelative(offset: number) {
+  async rotate(offset: number) {
     const isReversing = offset < 0;
     let absOffset = Math.abs(offset);
     while (absOffset > 0) {
       await new Promise((resolve) => {
         absOffset--;
         this.addEventListener("transitionend", resolve, { once: true });
-        this.moveCarouselInternal(isReversing ? -1 : 1);
+        this.#moveCarouselInternal(isReversing ? -1 : 1);
       });
 
       await new Promise((resolve) => setTimeout(resolve, 10));
     }
   }
 
-  moveCarouselInternal(direction: number) {
+  #moveCarouselInternal(direction: number) {
     this.isReversing = direction < 0;
 
     this.currentState = (this.currentState - direction) % this.layout.length;
     if (this.currentState < 0) this.currentState += this.layout.length;
-    this.updatePositions();
+    this.#updatePositions();
   }
 
-  private updatePositions() {
+  #updatePositions() {
     const items = this.querySelectorAll<HTMLElement>("carousel-item");
-    items.forEach((wrap, index) => {
+    items.forEach((item, index) => {
       let positionIndex = (index + this.currentState) % this.layout.length;
       if (positionIndex < 0) positionIndex += this.layout.length;
       const position = this.layout[positionIndex];
-      wrap.style.transform = `translate(calc(50cqw + ${position.translate}cqw - 50%), -50%) scale(${position.scale})`;
-      wrap.style.zIndex = (this.isReversing ? position.reverseZIndex : position.zIndex).toString();
+      item.style.transform = `translate(calc(50cqw + ${position.translate}cqw - 50%), -50%) scale(${position.scale})`;
+      const zIndex = this.isReversing ? position.reverseZIndex : position.zIndex;
+      item.style.zIndex = zIndex.toString();
+      item.dataset.fade = (this.layout.length - zIndex).toString();
     });
   }
 }

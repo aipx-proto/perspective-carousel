@@ -15,46 +15,97 @@
 <body>
   <h1>Perspective Carousel</h1>
   <hr />
+  <h2>Xbox consoles</h2>
+  <hr />
+  <div style="height: 600px; width: 100vw">
+    <perspective-carousel>
+      <carousel-item>
+        <img src="/xbox/s-black.webp">
+      </carousel-item>
+      <carousel-item>
+        <img src="/xbox/s-white.webp">
+      </carousel-item>
+      <carousel-item>
+        <img src="/xbox/x-black.webp">
+      </carousel-item>
+      <carousel-item>
+        <img src="/xbox/x-galaxy.webp">
+      </carousel-item>
+      <carousel-item>
+        <img src="/xbox/x-white.webp">
+      </carousel-item>
+    </perspective-carousel>
+  </div>
+
   <h2>Basic</h2>
   <hr />
-  <perspective-carousel>
-    <carousel-item>
-      <img src="https://placehold.co/200x400?text=1">
-      <p>Product 1</p>
-    </carousel-item>
-    <carousel-item>
-      <img src="https://placehold.co/200x400?text=2">
-      <p>Product 2</p>
-    </carousel-item>
-    <carousel-item>
-      <img src="https://placehold.co/200x400?text=3">
-      <p>Product 3</p>
-    </carousel-item>
-    <carousel-item>
-      <img src="https://placehold.co/200x400?text=4">
-      <p>Product 4</p>
-    </carousel-item>
-    <carousel-item>
-      <img src="https://placehold.co/200x400?text=5">
-      <p>Product 5</p>
-    </carousel-item>
-  </perspective-carousel>
+  <div class="container">
+    <perspective-carousel>
+      <carousel-item>
+        <img src="https://placehold.co/100x200?text=1">
+      </carousel-item>
+      <carousel-item>
+        <img src="https://placehold.co/100x200?text=2">
+      </carousel-item>
+      <carousel-item>
+        <img src="https://placehold.co/100x200?text=3">
+      </carousel-item>
+      <carousel-item>
+        <img src="https://placehold.co/100x200?text=4">
+      </carousel-item>
+      <carousel-item>
+        <img src="https://placehold.co/100x200?text=5">
+      </carousel-item>
+    </perspective-carousel>
+  </div>
 
-  <h2>With blur</h2>
-  <perspective-carousel>
-    <carousel-item>
-      <img src="https://placehold.co/200x400?text=1">
-      <p>Product 1</p>
-    </carousel-item>
-    <carousel-item>
-      <img src="https://placehold.co/200x400?text=2">
-      <p>Product 2</p>
-    </carousel-item>
-    <carousel-item>
-      <img src="https://placehold.co/200x400?text=3">
-      <p>Product 3</p>
-    </carousel-item>
-  </perspective-carousel>
+  <h2>No blur, no transparency</h2>
+  <hr />
+  <div class="container">
+    <perspective-carousel fade-to-blur="off" fade-to-transparent="off">
+      <carousel-item>
+        <img src="https://placehold.co/100x200?text=1">
+      </carousel-item>
+      <carousel-item>
+        <img src="https://placehold.co/100x200?text=2">
+      </carousel-item>
+      <carousel-item>
+        <img src="https://placehold.co/100x200?text=3">
+      </carousel-item>
+      <carousel-item>
+        <img src="https://placehold.co/100x200?text=4">
+      </carousel-item>
+      <carousel-item>
+        <img src="https://placehold.co/100x200?text=5">
+      </carousel-item>
+    </perspective-carousel>
+  </div>
+
+  <h2>Fixed size, fewer items, custom layout, and console.log focused element</h2>
+  <hr />
+  <div style="width: 800px; height: 400px;">
+    <perspective-carousel>
+      <carousel-item>
+        <div>
+          <img src="https://placehold.co/100x200?text=1">
+          <p>Product 1</p>
+        </div>
+      </carousel-item>
+      <carousel-item>
+        <div>
+          <img src="https://placehold.co/100x200?text=2">
+          <p>Product 2</p>
+        </div>
+      </carousel-item>
+      <carousel-item>
+        <div>
+          <img src="https://placehold.co/100x200?text=3">
+          <p>Product 3</p>
+        </div>
+      </carousel-item>
+    </perspective-carousel>
+  </div>
+
 
   <script type="module" src="/src/main.ts"></script>
 </body>
