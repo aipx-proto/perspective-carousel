@@ -1,88 +1,5 @@
+import { layouts } from "./layouts";
 import "./perspective-carousel.css";
-
-const layouts = {
-  /** 3 inline */
-  three: [
-    {
-      translate: -30,
-      scale: 0.6,
-      zIndex: 2,
-      reverseZIndex: 1,
-    },
-    {
-      translate: 0,
-      scale: 1,
-      zIndex: 3,
-      reverseZIndex: 3,
-    },
-    {
-      translate: 30,
-      scale: 0.6,
-      zIndex: 1,
-      reverseZIndex: 2,
-    },
-  ],
-  /** 3 front, 1 back */
-  four: [
-    {
-      translate: -30,
-      scale: 0.6,
-      zIndex: 4,
-      reverseZIndex: 4,
-    },
-    {
-      translate: 0,
-      scale: 1,
-      zIndex: 3,
-      reverseZIndex: 3,
-    },
-    {
-      translate: 30,
-      scale: 0.6,
-      zIndex: 2,
-      reverseZIndex: 2,
-    },
-    {
-      translate: 0,
-      scale: 0.35,
-      zIndex: 1,
-      reverseZIndex: 1,
-    },
-  ],
-  /** 3 front, 2 back */
-  five: [
-    {
-      translate: -30,
-      scale: 0.6,
-      zIndex: 4,
-      reverseZIndex: 3,
-    },
-    {
-      translate: 0,
-      scale: 1,
-      zIndex: 5,
-      reverseZIndex: 5,
-    },
-    {
-      translate: 30,
-      scale: 0.6,
-      zIndex: 3,
-      reverseZIndex: 4,
-    },
-    {
-      translate: 15,
-      scale: 0.35,
-      zIndex: 2,
-      reverseZIndex: 2,
-    },
-    {
-      translate: -15,
-      scale: 0.35,
-      zIndex: 1,
-      reverseZIndex: 1,
-    },
-  ],
-};
 
 let currentState = 0;
 let isReversing = false;
@@ -99,32 +16,9 @@ export class PerspectiveCarousel extends HTMLElement {
   connectedCallback() {
     this.items = [...this.querySelectorAll<HTMLElement>("carousel-item")!];
 
-    this.items.forEach((item, index) => {
-      item.classList.add("wrap");
-      item.id = `wrap${index}`;
-    });
-
-    switch (this.items.length) {
-      case 3: {
-        this.layout = layouts.three;
-        break;
-      }
-      case 4: {
-        this.layout = layouts.four;
-        break;
-      }
-      case 5: {
-        this.layout = layouts.five;
-        break;
-      }
-      default:
-        throw new Error(`The component only supports 3, 4, or 5 items. You provided ${this.items.length}`);
-    }
-
-    const container = this;
-    container.id = "contain";
-
-    container.append(...this.items);
+    const matchingLayout = layouts.find((layout) => layout.forLength === this.items.length);
+    if (!matchingLayout) throw new Error(`No layout found for ${this.items.length} items. We only support 3, 4, or 5 items`);
+    this.layout = matchingLayout.layout;
 
     // initial render
     this.updatePositions();
