@@ -1,10 +1,14 @@
 import { definePespectiveCarousel, PerspectiveCarousel } from "./lib/depth-carousel/perspective-carousel";
+import "./style.css";
 
 const carousel = document.querySelector<PerspectiveCarousel>("perspective-carousel")!;
 
 definePespectiveCarousel();
 
-// move items into the proper position
-carousel.init();
+setTimeout(() => {
+  carousel.moveCarouselRelative(5);
+}, 1000);
 
-carousel.moveCarouselRelative(2);
+setTimeout(() => {
+  carousel.moveCarouselRelative(-5);
+}, 4000);
