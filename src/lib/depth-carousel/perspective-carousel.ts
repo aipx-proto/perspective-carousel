@@ -1,10 +1,9 @@
 import { layouts } from "./layouts";
 import "./perspective-carousel.css";
 
-let currentState = 0;
-let isReversing = false;
-
 export class PerspectiveCarousel extends HTMLElement {
+  private currentState = 0;
+  private isReversing = false;
   private items: HTMLElement[] = [];
   private layout: {
     translate: number;
@@ -25,7 +24,7 @@ export class PerspectiveCarousel extends HTMLElement {
   }
 
   get currentOffset() {
-    return this.layout.length - currentState;
+    return this.layout.length - this.currentState;
   }
 
   get focusedItemIndex() {
@@ -51,21 +50,21 @@ export class PerspectiveCarousel extends HTMLElement {
   }
 
   moveCarouselInternal(direction: number) {
-    isReversing = direction < 0;
+    this.isReversing = direction < 0;
 
-    currentState = (currentState - direction) % this.layout.length;
-    if (currentState < 0) currentState += this.layout.length;
+    this.currentState = (this.currentState - direction) % this.layout.length;
+    if (this.currentState < 0) this.currentState += this.layout.length;
     this.updatePositions();
   }
 
   private updatePositions() {
     const items = this.querySelectorAll<HTMLElement>("carousel-item");
     items.forEach((wrap, index) => {
-      let positionIndex = (index + currentState) % this.layout.length;
+      let positionIndex = (index + this.currentState) % this.layout.length;
       if (positionIndex < 0) positionIndex += this.layout.length;
       const position = this.layout[positionIndex];
       wrap.style.transform = `translate(calc(50cqw + ${position.translate}cqw - 50%), -50%) scale(${position.scale})`;
-      wrap.style.zIndex = (isReversing ? position.reverseZIndex : position.zIndex).toString();
+      wrap.style.zIndex = (this.isReversing ? position.reverseZIndex : position.zIndex).toString();
     });
   }
 }
