@@ -1,8 +1,7 @@
-depth-carousel {
+perspective-carousel {
   box-sizing: border-box;
   display: flex;
   justify-content: center;
-  background-color: black;
   transition: background-color 300ms;
 
   #contain {
@@ -17,19 +16,12 @@ depth-carousel {
 
   &[data-initializing] {
     .wrap {
-      transition: transform 1s ease-out, z-index 1s;
-    }
-    img {
       transition: all 1s ease-out;
     }
   }
 
   &[data-active] {
     .wrap {
-      transition: transform 0.5s ease-in-out, z-index 0.5s;
-    }
-
-    img {
       transition: all 0.5s ease-in-out;
     }
   }
@@ -56,15 +48,14 @@ depth-carousel {
   .wrap {
     position: absolute;
     top: 50%;
-    /* start from center */
     transform: translate(calc(50cqw - 50%), -50%);
   }
 
-  img {
+  /* img {
     width: auto;
     height: 600px;
     object-fit: cover;
     filter: blur(0px) brightness(0);
     transform: scale(0.6);
-  }
+  } */
 }

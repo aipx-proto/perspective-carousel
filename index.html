@@ -13,159 +13,25 @@
 </head>
 
 <body>
-  <main class="u-scroll-snap">
-    <section class="page-section full-width page-section--hero">
-      <div class="promo-banner">Free shipping & 15% off over 200 purchase</div>
-      <header class="app-header" data-poi="welcome">
-        <div class="app-header__left">
-          <span class="brand-media"><img src="/contoso.svg"><span class="u-display-font">Contoso</span></span>
-          <nav>
-            <a href="#">Electronics</a>
-            <a href="#">Fashion</a>
-            <a href="#">Gaming</a>
-            <a href="#">Beauty</a>
-            <a href="#">Deals</a>
-          </nav>
-        </div>
-        <div>
-          <button class="icon-button">
-            <img src="/icons/search.svg">
-            <span>Search</span>
-          </button>
-          <button class="icon-button">
-            <img src="/icons/person.svg">
-            <span>Hi, Asha</span>
-          </button>
-          <button class="icon-button">
-            <img src="/icons/cart.svg">
-            <span>Cart</span>
-          </button>
-        </div>
-      </header>
-      <div id="hero" class="hero">
-        <video id="hero-video" class="video-background" hidden src="/hero.webm" muted></video>
-        <div class="video-overlay u-limit-width">
-          <h1>Hi, Asha! I'm Contoso,<br />your shopping assistant</h1>
-          <button id="start-app" class="mic-button">
-            <span>Let’s chat</span>
-            <img src="/icons/mic.svg">
-          </button>
-          <div class="chat-prompts">
-            <p>Show me the latest board games best for 6 players.</p>
-            <p>What laptop is best for graphic design?</p>
-            <p>Find me the best deals on a high-quality blender.</p>
-            <p>I need an ugly sweater for a party.</p>
-          </div>
-        </div>
-      </div>
-      </header>
 
-    </section>
+  <perspective-carousel>
+    <carousel-item>
+      <img src="https://placehold.co/200x400?text=1">
+    </carousel-item>
+    <carousel-item>
+      <img src="https://placehold.co/200x400?text=2">
+    </carousel-item>
+    <carousel-item>
+      <img src="https://placehold.co/200x400?text=3">
+    </carousel-item>
+    <carousel-item>
+      <img src="https://placehold.co/200x400?text=4">
+    </carousel-item>
+    <carousel-item>
+      <img src="https://placehold.co/200x400?text=5">
+    </carousel-item>
+  </perspective-carousel>
 
-    <section class="page-section page-section--console full-width">
-      <!-- <img src="/moonscape.avif" /> -->
-      <h2 class="u-limit-width" data-poi="choose-console-heading">Choose a console</h2>
-      <depth-carousel>
-        <div id="contain" data-poi="carousel"></div>
-      </depth-carousel>
-    </section>
-
-    <section class="page-section page-section--controller full-width" data-poi="controller-customizer">
-      <h2 class="u-limit-width">Make it yours</h2>
-      <div class="preview-stack" id="preview-stack" data-poi="controller">
-      </div>
-      <pre><code id="product-state" style="display: none"></code></pre>
-    </section>
-
-    <section class="page-section page-section--checkout full-width" data-poi="checkout">
-      <h2 class="u-limit-width" data-poi="checkout-heading">Checkout</h2>
-
-      <div class="checkout-layout u-limit-width">
-        <div class="cart-items">
-          <h3>2 items in cart</h3>
-          <div class="cart-card">
-            <img id="primary-item-image" src="http://placehold.co/300X200" />
-            <div>
-              <div id="primary-item-caption">Xbox Series X</div>
-              <div id="primary-item-price" data-line-price>$499.99</div>
-            </div>
-          </div>
-
-          <div class="cart-card">
-            <img id="secondary-item-image" style="opacity: 0;" src="http://placehold.co/300X200" />
-            <div>
-              <div id="secondary-item-caption">Xbox Wireless Controller<br /> Personalized</div>
-              <div id="secondary-item-price" data-line-price>$149.99</div>
-            </div>
-          </div>
-
-          <div class="cart-card">
-            <div>
-              <b>Total</b>
-            </div>
-            <div>
-              <b id="dollar-total">$649.98</b>
-            </div>
-          </div>
-        </div>
-        <div class="checkout-form" data-poi="checkout-form">
-          <section>
-            <h3>Ship to</h3>
-            <div class="map-container" id="map-container">
-              <ol-map zoom="14" lat="47.6458093" lon="-122.1319698">
-                <ol-layer-openstreetmap></ol-layer-openstreetmap>
-                <ol-layer-vector z-index="1">
-                  <ol-marker-icon src="/poi.png" lon="-122.1319698" lat="47.6458093" />
-                </ol-layer-vector>
-              </ol-map>
-            </div>
-
-            <p><span>Asha Sharma</span><br />
-            <address id="address"></address>
-            </p>
-          </section>
-
-          <section>
-            <h3>Pay with</h3>
-            <p>Card ending 1234</p>
-          </section>
-
-          <section>
-            <h3>Delivery</h3>
-            <p>Free Standard - $0.00</p>
-          </section>
-
-          <button id="placeorder" class="order-button">Place order</button>
-        </div>
-      </div>
-
-      <div class="toast u-limit-width" id="confirmation" hidden>
-        <div class="success-card">
-          <img src="/checkmark-solid.svg" />
-          <div>
-            <h3>Thank you for your order</h3>
-            <p>We’ll send a confirmation email and your order status shortly.</p>
-            <b>Order: 342N3E0</b>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-  <ai-bar>
-    <stt-node></stt-node>
-    <llm-node></llm-node>
-    <azure-tts-node></azure-tts-node>
-    <drag-handle></drag-handle>
-    <hide-bar></hide-bar>
-    <azure-connection></azure-connection>
-    <text-chat></text-chat>
-    <screen-capture></screen-capture>
-    <gesture-control></gesture-control>
-    <walkie-talkie-button></walkie-talkie-button>
-  </ai-bar>
-  <talk-avatar style="opacity: 0"></talk-avatar>
-  <script type="module" src="/src/elements/ai-bar/loader.ts"></script>
   <script type="module" src="/src/main.ts"></script>
 </body>
 

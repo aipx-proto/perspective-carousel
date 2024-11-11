@@ -1,12 +1,4 @@
-import "./depth-carousel.css";
-
-const items = [
-  { imageUrl: "https://placehold.co/200x400?text=1" },
-  { imageUrl: "https://placehold.co/200x400?text=2" },
-  { imageUrl: "https://placehold.co/200x400?text=3" },
-  { imageUrl: "https://placehold.co/200x400?text=4" },
-  { imageUrl: "https://placehold.co/200x400?text=5" },
-];
+import "./perspective-carousel.css";
 
 const positions = [
   {
@@ -46,17 +38,21 @@ const count = positions.length;
 let currentState = 0;
 let isReversing = false;
 
-export class DepthCarousel extends HTMLElement {
+export class PerspectiveCarousel extends HTMLElement {
+  private items: HTMLElement[] = [];
+
   connectedCallback() {
-    // render the images
-    this.querySelector("#contain")!.innerHTML = items
-      .map(
-        (img, index) => `
-    <div class="wrap" id="wrap${index}">
-      <img src="${img}" class="ball" id="ball${index}" />
-    </div>`
-      )
-      .join("");
+    this.items = [...this.querySelectorAll<HTMLElement>("carousel-items")!];
+
+    this.items.forEach((item, index) => {
+      item.classList.add("wrap");
+      item.id = `wrap${index}`;
+    });
+
+    const container = document.createElement("div");
+    container.id = "contain";
+
+    container.append(...this.items);
   }
 
   init() {
@@ -78,7 +74,7 @@ export class DepthCarousel extends HTMLElement {
   }
 
   get currentItem() {
-    return items[this.focusedItemIndex];
+    return this.items[this.focusedItemIndex];
   }
 
   async moveCarouselRelative(offset: number) {
@@ -118,6 +114,6 @@ export class DepthCarousel extends HTMLElement {
   }
 }
 
-export function defineDepthCarousel(tagName = "depth-carousel") {
-  customElements.define(tagName, DepthCarousel);
+export function definePespectiveCarousel(tagName = "perspective-carousel") {
+  customElements.define(tagName, PerspectiveCarousel);
 }
