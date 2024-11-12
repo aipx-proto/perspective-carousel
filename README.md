@@ -48,6 +48,30 @@ npm run dev
 # Open browser and navigate to http://localhost:5173
 ```
 
+## APIs
+
+```html
+<perspective-carousel>
+  <carousel-item> Item 1 </carousel-item>
+  <carousel-item> Item 2 </carousel-item>
+  <carousel-item> Item 3 </carousel-item>
+</perspective-carousel>
+```
+
+```typescript
+const carousel = document.querySelector("perspective-carousel") as PerspectiveElement;
+
+/** Rotate the carousel by a number of stops. */
+carousel.rotateByOffset(relativeStops: number): void;
+
+/** Rotate the carousel to a specific index. */
+carousel.rotateToIndex(absoluteIndex: number): void;
+
+/** Rotate the carousel to a specific element (or the <carousel-item> that contains the element. */
+carousel.rotateToElement(targetElement: HTMLElement): void;
+
+```
+
 ## Usage note
 
 - Use `fade-mode="lighten"` only on light background, `fade-mode="darken"` on dark background. The default is no fading effect.

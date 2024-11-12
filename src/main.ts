@@ -4,22 +4,27 @@ import "./style.css";
 definePespectiveCarousel();
 
 const carousels = [...document.querySelectorAll<PerspectiveCarouselElement>("perspective-carousel")];
-
 const lastCarousel = carousels.at(-1)!;
 
-// Demo: rotate forward, then rotate backward
+// Demo - Control the carousel
+// rotate forward, rotate backward, rotate to index, rotate to first child element
 carousels.forEach((carousel, index) => {
   setTimeout(() => {
-    carousel.rotate(5);
+    carousel.rotateByOffset(3);
   }, 1000);
   setTimeout(() => {
-    carousel.rotate(-5);
+    carousel.rotateByOffset(-3);
   }, 4000);
+  setTimeout(() => {
+    carousel.rotateToIndex(2);
+  }, 7000);
+  setTimeout(() => {
+    carousel.rotateToElement(carousel.querySelector("carousel-item")!);
+  }, 8000);
 });
 
-// emit before animation starts
+// Demo - Handle the events
 lastCarousel.addEventListener("rotatestart", (event) => {
-  // In "rotatestart", focusedItem is the old focus
   console.log(`Old focus is: ${getLastCarouselItemLabel(lastCarousel.focusedItem)}`);
 
   const { oldFocus, newFocus } = (event as CustomEvent<RotateStartEventDetail>).detail;

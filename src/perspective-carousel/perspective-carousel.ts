@@ -56,7 +56,24 @@ export class PerspectiveCarouselElement extends HTMLElement {
     return this.items[this.focusedItemIndex];
   }
 
-  async rotate(offset: number) {
+  /** Rotate to a specific <carousel-item> or its descendent, with the fewest number of stops */
+  async rotateToElement(element: HTMLElement) {
+    const index = this.items.findIndex((carouselElement) => carouselElement.contains(element));
+    if (index === -1) throw new Error("Element not found in carousel");
+    this.rotateToIndex(index);
+  }
+
+  async rotateToIndex(index: number) {
+    const positiveOffset = this.#smallestPositiveModulo(index - this.focusedItemIndex, this.layout.length);
+    const negativeOffset = this.#largestNegativeModulo(index - this.focusedItemIndex, this.layout.length);
+    if (Math.abs(negativeOffset) < positiveOffset) {
+      await this.rotateByOffset(negativeOffset);
+    } else {
+      await this.rotateByOffset(positiveOffset);
+    }
+  }
+
+  async rotateByOffset(offset: number) {
     const isReversing = offset < 0;
     let absOffset = Math.abs(offset);
     const startFocus = this.focusedItem;
@@ -101,6 +118,9 @@ export class PerspectiveCarouselElement extends HTMLElement {
 
   #smallestPositiveModulo(n: number, m: number) {
     return ((n % m) + m) % m;
+  }
+  #largestNegativeModulo(n: number, m: number) {
+    return ((n % m) - m) % m;
   }
 
   #moveCarouselInternal(direction: number) {
