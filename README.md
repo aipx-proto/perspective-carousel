@@ -6,6 +6,8 @@
 
 Demo of using `<perspective-carousel>` and Azure OpenAI GPT-4o to build an Xbox console shopping experience
 
+![image](https://github.com/user-attachments/assets/1e64cf7a-b768-4102-a7a8-3ba1ec2da72a)
+
 ```bash
 npm i
 npm run dev
