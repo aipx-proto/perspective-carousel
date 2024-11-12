@@ -50,6 +50,9 @@ npm run dev
 
 ## APIs
 
+> [!IMPORTANT]
+> The carousel can only support 3, 4, or 5 items. It looks the best with 3 or 5 items.
+
 ```html
 <perspective-carousel>
   <carousel-item> Item 1 </carousel-item>
@@ -76,14 +79,14 @@ carousel.rotateToElement(targetElement: HTMLElement): void;
 
 - Use `fade-mode="lighten"` only on light background, `fade-mode="darken"` on dark background. The default is no fading effect.
 - The container will center the items, but it's your responsibility set the width and height of the container and items each respectively and avoid overflow.
-- The carousel cannot process back-to-back rotation calls. Instead of this:
+- The carousel cannot merge rotation calls. So instead of this:
   ```js
-  document.querySelector("perspective-carousel").rotate(1);
-  document.querySelector("perspective-carousel").rotate(1);
-  document.querySelector("perspective-carousel").rotate(1);
+  document.querySelector("perspective-carousel").rotateByOffset(1);
+  document.querySelector("perspective-carousel").rotateByOffset(1);
+  document.querySelector("perspective-carousel").rotateByOffset(1);
   ```
   You should do this
   ```js
-  document.querySelector("perspective-carousel").rotate(3);
+  document.querySelector("perspective-carousel").rotateByOffset(3);
   ```
 - The carousel will emit events before and after each step in the rotation. See `main.ts` for example.
