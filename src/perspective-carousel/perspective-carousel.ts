@@ -54,7 +54,6 @@ export class PerspectiveCarousel extends HTMLElement {
     while (absOffset > 0) {
       const oldFocus = this.items[this.focusedItemIndex];
       const newIndex = (this.layout.length + this.focusedItemIndex + (isReversing ? -1 : 1)) % this.layout.length;
-      console.log({ newIndex, length: this.layout.length });
       const newFocus = this.items[newIndex];
 
       this.dispatchEvent(
