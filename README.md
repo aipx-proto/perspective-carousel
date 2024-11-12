@@ -18,10 +18,10 @@ npm run dev
 ## Quickstart
 
 ```html
-<script src="https://esm.sh/gh/chuanqisun/perspective-carousel@0.0.5/src/lib.ts" type="module"></script>
+<script src="https://esm.sh/gh/aipx-proto/perspective-carousel@0.0.6/src/lib.ts" type="module"></script>
 
 <style>
-  @import url("https://esm.sh/gh/chuanqisun/perspective-carousel@0.0.5/src/lib.css");
+  @import url("https://esm.sh/gh/aipx-proto/perspective-carousel@0.0.6/src/lib.css");
 </style>
 
 <button id="prev">Prev</button>
