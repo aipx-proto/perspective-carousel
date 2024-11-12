@@ -1,6 +1,16 @@
 import { layouts } from "./layouts";
 import "./perspective-carousel.css";
 
+export interface RotateStartEventDetail {
+  oldFocus: HTMLElement;
+  newFocus: HTMLElement;
+}
+
+export interface RotateEndEventDetail {
+  oldFocus: HTMLElement;
+  newFocus: HTMLElement;
+}
+
 export class PerspectiveCarousel extends HTMLElement {
   private currentState = 0;
   private isReversing = false;
@@ -21,6 +31,8 @@ export class PerspectiveCarousel extends HTMLElement {
 
     // initial render
     this.#updatePositions();
+    // avoid animating initial layout setup
+    setTimeout(() => this.setAttribute("active", ""), 0);
   }
 
   get currentOffset() {
@@ -28,6 +40,7 @@ export class PerspectiveCarousel extends HTMLElement {
   }
 
   get focusedItemIndex() {
+    // Internally, we count from left to right, and always make sure the 2nd item (index = 1) is the focused item
     return (this.currentOffset + 1) % this.layout.length;
   }
 
@@ -39,11 +52,34 @@ export class PerspectiveCarousel extends HTMLElement {
     const isReversing = offset < 0;
     let absOffset = Math.abs(offset);
     while (absOffset > 0) {
+      const oldFocus = this.items[this.focusedItemIndex];
+      const newIndex = (this.layout.length + this.focusedItemIndex + (isReversing ? -1 : 1)) % this.layout.length;
+      console.log({ newIndex, length: this.layout.length });
+      const newFocus = this.items[newIndex];
+
+      this.dispatchEvent(
+        new CustomEvent<RotateStartEventDetail>("rotatestart", {
+          detail: {
+            oldFocus,
+            newFocus,
+          },
+        })
+      );
+
       await new Promise((resolve) => {
         absOffset--;
         this.addEventListener("transitionend", resolve, { once: true });
         this.#moveCarouselInternal(isReversing ? -1 : 1);
       });
+
+      this.dispatchEvent(
+        new CustomEvent<RotateEndEventDetail>("rotateend", {
+          detail: {
+            oldFocus,
+            newFocus,
+          },
+        })
+      );
 
       await new Promise((resolve) => setTimeout(resolve, 10));
     }
@@ -66,7 +102,7 @@ export class PerspectiveCarousel extends HTMLElement {
       item.style.transform = `translate(calc(50cqw + ${position.translate}cqw - 50%), -50%) scale(${position.scale})`;
       const zIndex = this.isReversing ? position.reverseZIndex : position.zIndex;
       item.style.zIndex = zIndex.toString();
-      item.dataset.fade = (this.layout.length - zIndex).toString();
+      item.dataset.distance = (this.layout.length - zIndex).toString();
     });
   }
 }

@@ -10,31 +10,56 @@ perspective-carousel {
   container-type: inline-size;
 
   carousel-item {
-    transition: all 0.5s ease-in-out;
+    --lighten-factor: 0; /* Should range only between 0 and 1 */
+    --blur: 0px;
+    --brightness: 1;
+    --lighten-filter: blur(var(--blur)) invert(calc(var(--lighten-factor) / 2)) brightness(calc(1 + var(--lighten-factor)));
+    --darken-filter: blur(var(--blur)) brightness(var(--brightness));
+
+    filter: var(--darken-filter);
+    opacity: 1;
+
     position: absolute;
     top: 50%;
     transform: translate(calc(50cqw - 50%), -50%);
   }
 
-  filter: blur(0px);
-  opacity: 1;
-
-  &:not([fade-to-blur="off"]) {
-    [data-fade="3"],
-    [data-fade="4"] {
-      filter: blur(2px);
+  &[active] {
+    carousel-item {
+      transition: all 0.5s ease-in-out;
     }
   }
 
-  &:not([fade-to-transparent="off"]) {
-    [data-fade="3"],
-    [data-fade="4"] {
-      opacity: 0.3;
+  /** Lighten */
+  &[fade-mode="lighten"] {
+    [data-distance="1"],
+    [data-distance="2"] {
+      --lighten-factor: 0.1;
+      filter: var(--lighten-filter);
     }
 
-    [data-fade="1"],
-    [data-fade="2"] {
-      opacity: 0.8;
+    [data-distance="3"],
+    [data-distance="4"] {
+      --lighten-factor: 0.2;
+      --blur: 2px;
+      filter: var(--lighten-filter);
+    }
+  }
+
+  /** Darken */
+  &[fade-mode="darken"] {
+    [data-distance="1"],
+    [data-distance="2"] {
+      --blur: 0px;
+      --brightness: 0.8;
+      filter: var(--darken-filter);
+    }
+
+    [data-distance="3"],
+    [data-distance="4"] {
+      --blur: 2px;
+      --brightness: 0.3;
+      filter: var(--darken-filter);
     }
   }
 }

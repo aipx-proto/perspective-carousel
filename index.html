@@ -17,8 +17,8 @@
   <hr />
   <h2>Xbox consoles</h2>
   <hr />
-  <div style="height: 600px; width: 100vw">
-    <perspective-carousel>
+  <div style="height: 800px; width: 100vw; background-color: black">
+    <perspective-carousel fade-mode="darken">
       <carousel-item>
         <img src="/xbox/s-black.webp">
       </carousel-item>
@@ -40,6 +40,28 @@
   <h2>Basic</h2>
   <hr />
   <div class="container">
+    <perspective-carousel fade-mode="lighten">
+      <carousel-item>
+        <img src="https://placehold.co/100x200?text=1">
+      </carousel-item>
+      <carousel-item>
+        <img src="https://placehold.co/100x200?text=2">
+      </carousel-item>
+      <carousel-item>
+        <img src="https://placehold.co/100x200?text=3">
+      </carousel-item>
+      <carousel-item>
+        <img src="https://placehold.co/100x200?text=4">
+      </carousel-item>
+      <carousel-item>
+        <img src="https://placehold.co/100x200?text=5">
+      </carousel-item>
+    </perspective-carousel>
+  </div>
+
+  <h2>No fade effect</h2>
+  <hr />
+  <div class="container">
     <perspective-carousel>
       <carousel-item>
         <img src="https://placehold.co/100x200?text=1">
@@ -59,31 +81,9 @@
     </perspective-carousel>
   </div>
 
-  <h2>No blur, no transparency</h2>
+  <h2>Fixed size, dark background, fewer items, custom layout, and console.log focused element</h2>
   <hr />
-  <div class="container">
-    <perspective-carousel fade-to-blur="off" fade-to-transparent="off">
-      <carousel-item>
-        <img src="https://placehold.co/100x200?text=1">
-      </carousel-item>
-      <carousel-item>
-        <img src="https://placehold.co/100x200?text=2">
-      </carousel-item>
-      <carousel-item>
-        <img src="https://placehold.co/100x200?text=3">
-      </carousel-item>
-      <carousel-item>
-        <img src="https://placehold.co/100x200?text=4">
-      </carousel-item>
-      <carousel-item>
-        <img src="https://placehold.co/100x200?text=5">
-      </carousel-item>
-    </perspective-carousel>
-  </div>
-
-  <h2>Fixed size, fewer items, custom layout, and console.log focused element</h2>
-  <hr />
-  <div style="width: 800px; height: 400px;">
+  <div style="width: 800px; height: 400px; background: black">
     <perspective-carousel>
       <carousel-item>
         <div>
