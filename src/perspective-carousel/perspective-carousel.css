@@ -3,7 +3,6 @@ perspective-carousel {
   width: 100%;
   box-sizing: border-box;
   display: flex;
-  /* justify-content: center; */
   position: relative;
 
   container-name: carousel;
@@ -13,8 +12,9 @@ perspective-carousel {
     --lighten-factor: 0; /* Should range only between 0 and 1 */
     --blur: 0px;
     --brightness: 1;
+    --transition-duration: 0.5s;
     --lighten-filter: blur(var(--blur)) invert(calc(var(--lighten-factor) / 2)) brightness(calc(1 + var(--lighten-factor)));
-    --darken-filter: blur(var(--blur)) brightness(var(--brightness));
+    --darken-filter: blur(var(--blur)) invert(0) brightness(var(--brightness));
 
     filter: var(--darken-filter);
     opacity: 1;
@@ -26,12 +26,16 @@ perspective-carousel {
 
   &[active] {
     carousel-item {
-      transition: all 0.5s ease-in-out;
+      transition: all var(--transition-duration) ease-in-out;
     }
   }
 
   /** Lighten */
   &[fade-mode="lighten"] {
+    caoursel-item {
+      filter: var(--lighten-filter);
+    }
+
     [data-distance="1"],
     [data-distance="2"] {
       --lighten-factor: 0.1;
