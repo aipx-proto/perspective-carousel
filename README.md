@@ -1,6 +1,19 @@
-# Quick start
+# Perspective Carousel
 
 ![demo](public/demo.gif)
+
+## Xbox Console Shopping Demo
+
+Demo of using `<perspective-carousel>` and Azure OpenAI GPT-4o to build an Xbox console shopping experience
+
+```bash
+npm i
+npm run dev
+
+# Open http://localhost:5173
+```
+
+## Quickstart
 
 ```html
 <script src="https://esm.sh/gh/chuanqisun/perspective-carousel@0.0.5/src/lib.ts" type="module"></script>
@@ -38,7 +51,7 @@
 </script>
 ```
 
-## APIs
+## Element APIs
 
 > [!IMPORTANT]
 > The carousel can only support 3, 4, or 5 items. It looks the best with 3 or 5 items.
