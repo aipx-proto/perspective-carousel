@@ -38,18 +38,6 @@
 </script>
 ```
 
-To integrate into React, you can copy paste the source code under `/src/perspective-carouse/` into your project.
-See reference implementation on StackBlitz: https://stackblitz.com/edit/perspective-carousel-react?file=src%2Fmain.tsx
-
-More examples are available in `/index.html`. You can run a local dev server to play with them live:
-
-```bash
-npm install
-npm run dev
-
-# Open browser and navigate to http://localhost:5173
-```
-
 ## APIs
 
 > [!IMPORTANT]
@@ -77,6 +65,15 @@ carousel.rotateToElement(targetElement: HTMLElement): void;
 
 ```
 
+More examples are available in `/index.html`. You can run a local dev server to play with them live:
+
+```bash
+npm install
+npm run dev
+
+# Open browser and navigate to http://localhost:5173
+```
+
 ## Usage note
 
 - Use `fade-mode="lighten"` only on light background, `fade-mode="darken"` on dark background. The default is no fading effect.
@@ -92,3 +89,8 @@ carousel.rotateToElement(targetElement: HTMLElement): void;
   document.querySelector("perspective-carousel").rotateByOffset(3);
   ```
 - The carousel will emit events before and after each step in the rotation. See `main.ts` for example.
+
+## React integration
+
+To integrate into React, you can copy paste the source code under `/src/perspective-carouse/` into your project.
+See reference implementation on StackBlitz: https://stackblitz.com/edit/perspective-carousel-react?file=src%2Fmain.tsx
