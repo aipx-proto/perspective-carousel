@@ -22,7 +22,7 @@ export interface RotateEndEventDetail {
 export class PerspectiveCarouselElement extends HTMLElement {
   private currentState = 0;
   private isReversing = false;
-  private items: HTMLElement[] = [];
+  private absoluteItems: HTMLElement[] = [];
   private layout: {
     translate: number;
     scale: number;
@@ -31,10 +31,10 @@ export class PerspectiveCarouselElement extends HTMLElement {
   }[] = [];
 
   connectedCallback() {
-    this.items = [...this.querySelectorAll<HTMLElement>("carousel-item")!];
+    this.absoluteItems = [...this.querySelectorAll<HTMLElement>("carousel-item")!];
 
-    const matchingLayout = getLayouts().find((layout) => layout.forLength === this.items.length);
-    if (!matchingLayout) throw new Error(`No layout found for ${this.items.length} items. We only support 3, 4, or 5 items`);
+    const matchingLayout = getLayouts().find((layout) => layout.forLength === this.absoluteItems.length);
+    if (!matchingLayout) throw new Error(`No layout found for ${this.absoluteItems.length} items. We only support 3, 4, or 5 items`);
     this.layout = matchingLayout.layout;
 
     // initial render
@@ -53,12 +53,78 @@ export class PerspectiveCarouselElement extends HTMLElement {
   }
 
   get focusedItem() {
-    return this.items[this.focusedItemIndex];
+    return this.absoluteItems[this.focusedItemIndex];
+  }
+
+  get items() {
+    const positionedItems = this.#getBarrelShiftedArray(this.absoluteItems, this.currentOffset);
+    switch (this.layout.length) {
+      case 3:
+        return [
+          {
+            posiotion: "Left",
+            element: positionedItems[0],
+          },
+          {
+            posiotion: "Center",
+            element: positionedItems[1],
+          },
+          {
+            posiotion: "Right",
+            element: positionedItems[2],
+          },
+        ];
+      case 4:
+        return [
+          {
+            posiotion: "Left",
+            element: positionedItems[0],
+          },
+          {
+            posiotion: "Center",
+            element: positionedItems[1],
+          },
+          {
+            posiotion: "Right",
+            element: positionedItems[2],
+          },
+          {
+            posiotion: "Back",
+            element: positionedItems[3],
+          },
+        ];
+      case 5:
+        return [
+          {
+            posiotion: "Left",
+            element: positionedItems[0],
+          },
+          {
+            posiotion: "Front Center",
+            element: positionedItems[1],
+          },
+          {
+            posiotion: "Right",
+            element: positionedItems[2],
+          },
+          {
+            posiotion: "Back Right",
+            element: positionedItems[3],
+          },
+          {
+            posiotion: "Back Left",
+            element: positionedItems[4],
+          },
+        ];
+
+      default:
+        throw new Error(`Unsupported layout length: ${this.layout.length}. We only support 3, 4, or 5 items`);
+    }
   }
 
   /** Rotate to a specific <carousel-item> or its descendent, with the fewest number of stops */
   async rotateToElement(element: HTMLElement) {
-    const index = this.items.findIndex((carouselElement) => carouselElement.contains(element));
+    const index = this.absoluteItems.findIndex((carouselElement) => carouselElement.contains(element));
     if (index === -1) throw new Error("Element not found in carousel");
     this.rotateToIndex(index);
   }
@@ -77,7 +143,7 @@ export class PerspectiveCarouselElement extends HTMLElement {
     const isReversing = offset < 0;
     let absOffset = Math.abs(offset);
     const startFocus = this.focusedItem;
-    const endFocus = this.items[this.#smallestPositiveModulo(this.focusedItemIndex + offset, this.layout.length)];
+    const endFocus = this.absoluteItems[this.#smallestPositiveModulo(this.focusedItemIndex + offset, this.layout.length)];
 
     if (absOffset > 0) {
       this.dispatchEvent(
@@ -138,6 +204,12 @@ export class PerspectiveCarouselElement extends HTMLElement {
       item.style.zIndex = zIndex.toString();
       item.dataset.distance = (this.layout.length - zIndex).toString();
     });
+  }
+
+  #getBarrelShiftedArray<T>(arr: T[], direction: number): T[] {
+    const n = arr.length;
+    const shift = ((direction % n) + n) % n;
+    return [...arr.slice(shift), ...arr.slice(0, shift)];
   }
 }
 

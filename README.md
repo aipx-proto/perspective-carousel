@@ -90,8 +90,3 @@ carousel.addEventListener("rotateend", (event) => {
   const { oldFocus, newFocus } = event.detail;
 });
 ```
-
-## React integration
-
-To integrate into React, you can copy paste the source code under `/src/perspective-carouse/` into your project.
-See reference implementation on StackBlitz: https://stackblitz.com/edit/perspective-carousel-react?file=src%2Fmain.tsx
