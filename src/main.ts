@@ -1,4 +1,4 @@
-import { definePespectiveCarousel, PerspectiveCarousel, RotateStartEventDetail } from "./lib/depth-carousel/perspective-carousel";
+import { definePespectiveCarousel, PerspectiveCarousel, RotateStartEventDetail } from "./perspective-carousel/perspective-carousel";
 import "./style.css";
 
 definePespectiveCarousel();

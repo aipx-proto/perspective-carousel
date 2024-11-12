@@ -1,1 +1,4 @@
-export * from "./lib/depth-carousel/perspective-carousel";
+export * from "./perspective-carousel/perspective-carousel";
+import { definePespectiveCarousel } from "./perspective-carousel/perspective-carousel";
+
+definePespectiveCarousel();
