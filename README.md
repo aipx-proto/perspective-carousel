@@ -33,8 +33,8 @@
 </div>
 
 <script>
-  document.getElementById("next").onclick = () => document.querySelector("perspective-carousel").rotate(1);
-  document.getElementById("prev").onclick = () => document.querySelector("perspective-carousel").rotate(-1);
+  document.getElementById("next").onclick = () => document.querySelector("perspective-carousel").rotateByOffset(1);
+  document.getElementById("prev").onclick = () => document.querySelector("perspective-carousel").rotateByOffset(-1);
 </script>
 ```
 
