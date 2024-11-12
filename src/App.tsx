@@ -85,26 +85,24 @@ ${promt}
       const parsedArgs = JSON.parse(toolCall.function.arguments);
       switch (toolCall.function.name) {
         case "talk":
-          // pipe into tts
-          console.log(`[utterance]: ${parsedArgs.utterance}`);
+          // TODO pipe into tts
           setUtterances((prev) => [parsedArgs.utterance, ...prev]);
           break;
 
         case "wrap_up":
-          // pipe into tts
-          console.log(`[utterance]: ${parsedArgs.compliment}`);
+          // TODO pipe into tts
           setUtterances((prev) => [parsedArgs.compliment, ...prev]);
-          console.log(`[utterance]: ${parsedArgs.nextStep}`);
           setUtterances((prev) => [parsedArgs.nextStep, ...prev]);
           window.alert("The carousel demo has ended successfully");
+
+          // TODO transition into the next scene
           break;
 
         case "change_focus":
-          // pipe into tts
-          carouselRef.current?.rotateToElement(document.getElementById(parsedArgs.newFocusId)!);
-          console.log(`[utterance]: ${parsedArgs.introduction}`);
-          setUtterances((prev) => [parsedArgs.introduction, ...prev]);
           console.log(`[new id]: ${parsedArgs.newFocusId}`);
+          carouselRef.current?.rotateToElement(document.getElementById(parsedArgs.newFocusId)!);
+          // TODO pipe into tts
+          setUtterances((prev) => [parsedArgs.introduction, ...prev]);
           break;
       }
     });
