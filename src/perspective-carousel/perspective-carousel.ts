@@ -59,37 +59,48 @@ export class PerspectiveCarouselElement extends HTMLElement {
   async rotate(offset: number) {
     const isReversing = offset < 0;
     let absOffset = Math.abs(offset);
-    while (absOffset > 0) {
-      const oldFocus = this.items[this.focusedItemIndex];
-      const newIndex = (this.layout.length + this.focusedItemIndex + (isReversing ? -1 : 1)) % this.layout.length;
-      const newFocus = this.items[newIndex];
+    const startFocus = this.focusedItem;
+    const endFocus = this.items[this.#smallestPositiveModulo(this.focusedItemIndex + offset, this.layout.length)];
 
+    if (absOffset > 0) {
       this.dispatchEvent(
         new CustomEvent<RotateStartEventDetail>("rotatestart", {
           detail: {
-            oldFocus,
-            newFocus,
+            oldFocus: startFocus,
+            newFocus: endFocus,
           },
         })
       );
 
-      await new Promise((resolve) => {
-        absOffset--;
-        this.addEventListener("transitionend", resolve, { once: true });
-        this.#moveCarouselInternal(isReversing ? -1 : 1);
-      });
+      while (absOffset > 0) {
+        const oldFocus = this.items[this.focusedItemIndex];
+        const newIndex = (this.layout.length + this.focusedItemIndex + (isReversing ? -1 : 1)) % this.layout.length;
+        const newFocus = this.items[newIndex];
 
-      this.dispatchEvent(
-        new CustomEvent<RotateEndEventDetail>("rotateend", {
-          detail: {
-            oldFocus,
-            newFocus,
-          },
-        })
-      );
+        await new Promise((resolve) => {
+          absOffset--;
+          this.addEventListener("transitionend", resolve, { once: true });
+          this.#moveCarouselInternal(isReversing ? -1 : 1);
+        });
 
-      await new Promise((resolve) => setTimeout(resolve, 10));
+        if (absOffset === 0) {
+          this.dispatchEvent(
+            new CustomEvent<RotateStartEventDetail>("rotateend", {
+              detail: {
+                oldFocus: startFocus,
+                newFocus: endFocus,
+              },
+            })
+          );
+        }
+
+        await new Promise((resolve) => setTimeout(resolve, 10));
+      }
     }
+  }
+
+  #smallestPositiveModulo(n: number, m: number) {
+    return ((n % m) + m) % m;
   }
 
   #moveCarouselInternal(direction: number) {
