@@ -36,6 +36,8 @@ function App() {
   const handePrompt = async (promt: string) => {
     abortControllerRef.current?.abort();
 
+    setUtterances((prev) => [`> ${promt}`, ...prev]);
+
     const scene = getSceneDescription(carouselRef.current!);
     console.log(`[scene]`, scene);
 
