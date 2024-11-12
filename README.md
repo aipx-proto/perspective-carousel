@@ -36,9 +36,9 @@
 </script>
 ```
 
-To integrate into React, you can copy paste the source code under `./src/perspective-carouse/` into your project.
+To integrate into React, you can copy paste the source code under `/src/perspective-carouse/` into your project.
 
-## Development
+More examples available in `/index.html`. You can run a local dev server to play with them live:
 
 ```bash
 npm install
@@ -46,5 +46,3 @@ npm run dev
 
 # Open browser and navigate to http://localhost:5173
 ```
-
-The element is not packaged. You can either copy paste the source code into your frontend project, or directly load the code from github via esm.sh as shown in the quick start
