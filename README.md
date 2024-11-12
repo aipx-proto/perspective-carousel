@@ -37,8 +37,9 @@
 ```
 
 To integrate into React, you can copy paste the source code under `/src/perspective-carouse/` into your project.
+See reference implementation on StackBlitz: https://stackblitz.com/edit/perspective-carousel-react?file=src%2Fmain.tsx
 
-More examples available in `/index.html`. You can run a local dev server to play with them live:
+More examples are available in `/index.html`. You can run a local dev server to play with them live:
 
 ```bash
 npm install
@@ -46,3 +47,19 @@ npm run dev
 
 # Open browser and navigate to http://localhost:5173
 ```
+
+## Usage note
+
+- Use `fade-mode="lighten"` only on light background, `fade-mode="darken"` on dark background. The default is no fading effect.
+- The container will center the items, but it's your responsibility set the width and height of the container and items each respectively and avoid overflow.
+- The carousel cannot process back-to-back rotation calls. Instead of this:
+  ```js
+  document.querySelector("perspective-carousel").rotate(1);
+  document.querySelector("perspective-carousel").rotate(1);
+  document.querySelector("perspective-carousel").rotate(1);
+  ```
+  You should do this
+  ```js
+  document.querySelector("perspective-carousel").rotate(3);
+  ```
+- The carousel will emit events before and after each step in the rotation. See `main.ts` for example.
