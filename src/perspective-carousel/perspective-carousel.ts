@@ -90,10 +90,6 @@ export class PerspectiveCarouselElement extends HTMLElement {
       );
 
       while (absOffset > 0) {
-        const oldFocus = this.items[this.focusedItemIndex];
-        const newIndex = (this.layout.length + this.focusedItemIndex + (isReversing ? -1 : 1)) % this.layout.length;
-        const newFocus = this.items[newIndex];
-
         await new Promise((resolve) => {
           absOffset--;
           this.addEventListener("transitionend", resolve, { once: true });
