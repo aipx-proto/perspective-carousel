@@ -1,6 +1,18 @@
 import { layouts } from "./layouts";
 import "./perspective-carousel.css";
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "perspective-carousel": PerspectiveCarouselAttributes;
+    }
+  }
+}
+
+export interface PerspectiveCarouselAttributes extends HTMLElement {
+  fadeMode?: "lighten" | "darken" /* default: lighten */;
+}
+
 export interface RotateStartEventDetail {
   oldFocus: HTMLElement;
   newFocus: HTMLElement;
@@ -11,7 +23,7 @@ export interface RotateEndEventDetail {
   newFocus: HTMLElement;
 }
 
-export class PerspectiveCarousel extends HTMLElement {
+export class PerspectiveCarouselElement extends HTMLElement {
   private currentState = 0;
   private isReversing = false;
   private items: HTMLElement[] = [];
@@ -107,5 +119,5 @@ export class PerspectiveCarousel extends HTMLElement {
 }
 
 export function definePespectiveCarousel(tagName = "perspective-carousel") {
-  customElements.define(tagName, PerspectiveCarousel);
+  customElements.define(tagName, PerspectiveCarouselElement);
 }

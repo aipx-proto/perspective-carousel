@@ -16,7 +16,7 @@ perspective-carousel {
     --lighten-filter: blur(var(--blur)) invert(calc(var(--lighten-factor) / 2)) brightness(calc(1 + var(--lighten-factor)));
     --darken-filter: blur(var(--blur)) invert(0) brightness(var(--brightness));
 
-    filter: var(--darken-filter);
+    filter: var(--lighten-filter);
     opacity: 1;
 
     position: absolute;
@@ -30,8 +30,8 @@ perspective-carousel {
     }
   }
 
-  /** Lighten */
-  &[fade-mode="lighten"] {
+  /** Lighten by default */
+  &:not([fade-mode="darken"]) {
     caoursel-item {
       filter: var(--lighten-filter);
     }

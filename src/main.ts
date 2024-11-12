@@ -1,9 +1,9 @@
-import { definePespectiveCarousel, PerspectiveCarousel, RotateStartEventDetail } from "./perspective-carousel/perspective-carousel";
+import { definePespectiveCarousel, PerspectiveCarouselElement, RotateStartEventDetail } from "./perspective-carousel/perspective-carousel";
 import "./style.css";
 
 definePespectiveCarousel();
 
-const carousels = [...document.querySelectorAll<PerspectiveCarousel>("perspective-carousel")];
+const carousels = [...document.querySelectorAll<PerspectiveCarouselElement>("perspective-carousel")];
 
 const lastCarousel = carousels.at(-1)!;
 
