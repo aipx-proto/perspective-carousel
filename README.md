@@ -49,6 +49,20 @@
   <carousel-item> Item 2 </carousel-item>
   <carousel-item> Item 3 </carousel-item>
 </perspective-carousel>
+
+<!-- Fade effect on dark background -->
+<perspective-carousel fade-mode="darken">
+  <carousel-item> Item 1 </carousel-item>
+  <carousel-item> Item 2 </carousel-item>
+  <carousel-item> Item 3 </carousel-item>
+</perspective-carousel>
+
+<!-- Fade effect on light background -->
+<perspective-carousel fade-mode="lighten">
+  <carousel-item> Item 1 </carousel-item>
+  <carousel-item> Item 2 </carousel-item>
+  <carousel-item> Item 3 </carousel-item>
+</perspective-carousel>
 ```
 
 ```typescript
@@ -68,6 +82,7 @@ console.log(carousel.focusedItem);
 
 /** Handle events */
 carousel.addEventListener("rotatestart", (event) => {
+  /** The old and new <carousel-item> elements */
   const { oldFocus, newFocus } = event.detail;
 });
 
@@ -75,30 +90,6 @@ carousel.addEventListener("rotateend", (event) => {
   const { oldFocus, newFocus } = event.detail;
 });
 ```
-
-More examples are available in `/index.html`. You can run a local dev server to play with them live:
-
-```bash
-npm install
-npm run dev
-
-# Open browser and navigate to http://localhost:5173
-```
-
-## Usage note
-
-- Use `fade-mode="lighten"` only on light background, `fade-mode="darken"` on dark background. The default is no fading effect.
-- The container will center the items, but it's your responsibility to set the width and height of the container and items each respectively while avoiding overflow.
-- The carousel cannot merge rotation calls. So instead of this:
-  ```js
-  document.querySelector("perspective-carousel").rotateByOffset(1);
-  document.querySelector("perspective-carousel").rotateByOffset(1);
-  document.querySelector("perspective-carousel").rotateByOffset(1);
-  ```
-  You should do this
-  ```js
-  document.querySelector("perspective-carousel").rotateByOffset(3);
-  ```
 
 ## React integration
 
