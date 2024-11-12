@@ -3,13 +3,10 @@ import "./perspective-carousel.css";
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      "perspective-carousel": PerspectiveCarouselAttributes;
+      "perspective-carousel": any;
+      "carousel-item": any;
     }
   }
-}
-
-export interface PerspectiveCarouselAttributes extends HTMLElement {
-  fadeMode?: "lighten" | "darken" /* default: lighten */;
 }
 
 export interface RotateStartEventDetail {

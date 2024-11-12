@@ -36,11 +36,7 @@
 </script>
 ```
 
-React integration
-
-```tsx
-
-```
+To integrate into React, you can copy paste the source code under `./src/perspective-carouse/` into your project.
 
 ## Development
 

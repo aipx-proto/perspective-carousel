@@ -31,7 +31,7 @@ perspective-carousel {
   }
 
   /** Lighten by default */
-  &:not([fade-mode="darken"]) {
+  &[fade-mode="darken"] {
     caoursel-item {
       filter: var(--lighten-filter);
     }
