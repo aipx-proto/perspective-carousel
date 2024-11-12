@@ -63,6 +63,17 @@ carousel.rotateToIndex(absoluteIndex: number): void;
 /** Rotate the carousel to a specific element (or the <carousel-item> that contains the element. */
 carousel.rotateToElement(targetElement: HTMLElement): void;
 
+/** Query current focus element */
+console.log(carousel.focusedItem);
+
+/** Handle events */
+carousel.addEventListener("rotatestart", (event) => {
+  const { oldFocus, newFocus } = event.detail;
+});
+
+carousel.addEventListener("rotateend", (event) => {
+  const { oldFocus, newFocus } = event.detail;
+});
 ```
 
 More examples are available in `/index.html`. You can run a local dev server to play with them live:
@@ -88,7 +99,6 @@ npm run dev
   ```js
   document.querySelector("perspective-carousel").rotateByOffset(3);
   ```
-- The carousel will emit events before and after each step in the rotation. See `main.ts` for example.
 
 ## React integration
 
