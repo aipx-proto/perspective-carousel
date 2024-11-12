@@ -77,7 +77,7 @@ npm run dev
 ## Usage note
 
 - Use `fade-mode="lighten"` only on light background, `fade-mode="darken"` on dark background. The default is no fading effect.
-- The container will center the items, but it's your responsibility set the width and height of the container and items each respectively and avoid overflow.
+- The container will center the items, but it's your responsibility to set the width and height of the container and items each respectively while avoiding overflow.
 - The carousel cannot merge rotation calls. So instead of this:
   ```js
   document.querySelector("perspective-carousel").rotateByOffset(1);
