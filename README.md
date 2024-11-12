@@ -1,10 +1,10 @@
 # Quick start
 
 ```html
-<script src="https://esm.sh/gh/chuanqisun/perspective-carousel@0.0.3/src/lib.ts" type="module"></script>
+<script src="https://esm.sh/gh/chuanqisun/perspective-carousel@0.0.5/src/lib.ts" type="module"></script>
 
 <style>
-  @import url("https://esm.sh/gh/chuanqisun/perspective-carousel@0.0.3/src/lib.css");
+  @import url("https://esm.sh/gh/chuanqisun/perspective-carousel@0.0.5/src/lib.css");
 </style>
 
 <button id="prev">Prev</button>
