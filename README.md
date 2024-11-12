@@ -1,5 +1,7 @@
 # Quick start
 
+![interim](https://github.com/user-attachments/assets/539c0231-599d-4035-9b40-97533c9dc4cc)
+
 ```html
 <script src="https://esm.sh/gh/chuanqisun/perspective-carousel@0.0.5/src/lib.ts" type="module"></script>
 
